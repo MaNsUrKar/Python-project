@@ -83,7 +83,7 @@ def execute_cmd(cmd):
     speak_engine.getProperty('voice', voices[4].id)
 
     speak("Доброво времени суток, пользователь")
-    speak("Ролакс вас влушает")
+    speak("Ролакс вас cлушает")
 
     stop_listening = r.listen_in_background(m, callback)
     while True: time.sleep(0.1)
