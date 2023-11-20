@@ -1,0 +1,76 @@
+from tkinter import*#tkinter linrary to work with app windows
+from tkinter import BooleanVar
+from tkinter.ttk import Combobox
+from tkinter.ttk import Checkbutton
+
+
+def clicked():#these 3 defs are for text showing after command using
+    res="scammed ".format(combo.get())
+    lbl.configure(text=res)
+
+def clicked1():
+    res = "swating is started ".format(combo.get())
+    lbl.configure(text=res)
+
+def clicked2():
+    res = "hehe loh ".format(combo.get())
+    lbl.configure(text=res)
+
+def bbn():#show radiobutton values
+    lbl2.configure(text=selected.get())
+def resizeFunc():#to make combobox length required length
+    newLen=len(combo.get())
+    combo.configure(width=newLen+2)
+
+def ifchkbtn():
+    if chk_state == 1:
+        res3 = "{}".format(txt.get())
+        lbl3.configure(text=res3)
+
+
+
+window = Tk()#main window
+window.title("djarvis 2 0 irl")
+window.geometry("450x450")
+
+txt=Entry(window,width=15)
+txt.grid(column=0,row=8)
+
+selected=IntVar()#for radiobutton value show
+btn2=Button(window,text="sosi bidlo",command=bbn)
+lbl2=Label(window)
+lbl2.grid(column=0,row=5)
+btn2.grid(column=0,row=6)
+
+lbl3=Label(window,text='test dlya chkbtn',font=("Arial Bold",10))
+lbl3.grid(column=0,row=10)
+
+
+btn3=Button(window,text='nazhmi',command=ifchkbtn)
+btn3.grid(column=0,row=9)
+
+chk_state: IntVar=IntVar()#Boolean-text int-number
+chk_state.set(0)
+chk=Checkbutton(window,text='chose',var=chk_state)#button with true/false conditions
+chk.grid(column=0,row=3)
+
+rd1=Radiobutton(window,text='dont pick',value=1,variable=selected)#массив кнопок из которых можно выбрать только 1
+rd2=Radiobutton(window,text='thus one too',value=2,variable=selected)
+rd3=Radiobutton(window,text='bibib',value=93,variable=selected)
+rd1.grid(column=0,row=4)
+rd2.grid(column=1,row=4)
+rd3.grid(column=2,row=4)
+
+btn=Button(window,text="get bitches",command=clicked)#button
+btn.grid(column=0,row=2)
+
+lbl=Label(window, text="pay 300$ for bitches", font=("Arial Bold", 10))#text
+lbl.grid(column=0, row=0)
+
+combo=Combobox(window,postcommand=resizeFunc)#combobox-box with several variants of picking
+combo['values']=("","ofc","no","yes(-300$from mom's card","dinahui")
+combo.current(0)
+combo.grid(column=0,row=1)
+
+
+window.mainloop()
