@@ -1,8 +1,10 @@
 from keyboard import Keyboard
+import volume
+import pycaw
 class Sound:
 
-    # Current volume, we will set this to 100 once initialized
-    __current_volume = None
+
+    __current_volume = volume.GetMasterVolumeLevelScalar()*100
 
     @staticmethod
     def current_volume():
@@ -53,29 +55,6 @@ class Sound:
             Sound.volume_set(50)
 
 
-
-    @staticmethod
-    def mute():
-        """
-        Mute or un-mute the system sounds
-        Done by triggering a fake VK_VOLUME_MUTE key event
-        :return: void
-        """
-        Sound.__track()
-        Sound.__is_muted = (not Sound.__is_muted)
-        Keyboard.key(Keyboard.VK_VOLUME_MUTE)
-
-    @staticmethod
-    def volume_up():
-        """
-        Increase system volume
-        Done by triggering a fake VK_VOLUME_UP key event
-        :return: void
-        """
-        Sound.__track()
-        Sound.__set_current_volume(Sound.current_volume() + 2)
-        Keyboard.key(Keyboard.VK_VOLUME_UP)
-
     @staticmethod
     def volume_set(amount):
         """
@@ -109,7 +88,19 @@ class Sound:
         """
         Sound.volume_set(100)
 
-    def volume_down():
+    def volume_down(self):
         Sound.__track()
         Sound.__set_current_volume(Sound.current_volume() - 2)
         Keyboard.key(Keyboard.VK_VOLUME_DOWN)
+    def volume_up(self):
+        Sound.__track()
+        Sound.__set_current_volume(Sound.current_volume() + 2)
+        Keyboard.key(Keyboard.VK_VOLUME_UP)
+
+    def mute(self):
+        Sound.__track()
+        Sound.__is_muted = (not Sound.__is_muted)
+        Keyboard.key(Keyboard.VK_VOLUME_MUTE)
+
+    def volume(self, __current_volume=volume.GetMasterVolumeLevelScalar()*100):
+        print( __current_volume )
